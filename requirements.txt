@@ -1,0 +1,8 @@
+librosa
+requests
+Flask
+SpeechRecognition
+pyAudioAnalysis
+pandas
+
+
