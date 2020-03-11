@@ -8,6 +8,13 @@ THRESHOLD_MONOTONE = 1000
 THRESHOLD_SILENSE = 10
 
 
+def none_to_empty(x):
+    if x is None:
+        return ''
+    else:
+        return x
+    
+
 class Sound2VecModel:
     def __init__(self, audio_path):
         self.is_speech = is_speech(audio_path)
@@ -24,15 +31,18 @@ class Sound2VecModel:
                 self.text = self.get_text(audio_path)
                 print('ТЕКСТ: ', self.text)
                 self.result = 'Получен вектор с параметрами: '
-
             else:
                 self.result = 'Аудио файл не сожержит речь!'
         except Exception as e:
             self.result = e
+            self.volume = None
+            self.silens_segm = None
+            self.monotone = None
+            self.text = None
 
     def __str__(self):
         if self.is_speech:
-            return f'{self.result} {self.volume} {self.silens_segm} {self.monotone} {self.text}'
+            return f'{self.result} {none_to_empty(self.volume)} {none_to_empty(self.silens_segm)} {none_to_empty(self.monotone)} {none_to_empty(self.text)}'
         else:
             return f'{self.result}'
 
@@ -42,7 +52,7 @@ class Sound2VecModel:
         return 'Громкость'
 
     def get_silens_segm(self, audio_path):
-        return otnosh(audio_path, THRESHOLD_SILENSE = 10)
+        return otnosh(audio_path, THRESHOLD_SILENSE=10)
 
     def get_monotone(self, audio_path):
         return get_monotone(audio_path, THRESHOLD_MONOTONE)
@@ -57,8 +67,9 @@ class Sound2VecModel:
     def get_recomend(self):
         pass
 
+
 test_path = 'audio/test1.wav'
 if __name__ == "__main__":
     sound = Sound2VecModel('test1.wav')
-    #print(sound)
-    #sound.get_text()
+    # print(sound)
+    # sound.get_text()
