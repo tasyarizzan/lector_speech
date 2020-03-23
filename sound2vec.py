@@ -34,11 +34,13 @@ class Sound2VecModel:
         self.is_speech = is_speech(one_channel_path)
         ws1.cell(column=1, row=3, value="Is speech?")
         ws1.cell(column=2, row=3, value=self.is_speech)
+
         try:
             if self.is_speech:
                 print('* ЗАПИСЬ ЯВЛЯЕТСЯ ЗВУКОМ')
                 print(self.get_volume(one_channel_path))
                 self.volume = self.get_volume(one_channel_path)
+
                 #ws1.cell(column=1, row=4, value="Volume:")
                 #ws1.cell(column=2, row=4, value=self.volume)
                 print('Громкость: ', self.volume)
@@ -53,6 +55,7 @@ class Sound2VecModel:
                 self.text = self.get_text(one_channel_path)
                 #ws1.cell(column=1, row=7, value="Text of speech:")
                 #ws1.cell(column=2, row=7, value=self.text)
+
                 print('ТЕКСТ: ', self.text)
                 self.result = 'Получен вектор с параметрами: '
             else:
@@ -63,8 +66,10 @@ class Sound2VecModel:
             self.silens_segm = None
             self.monotone = None
             self.text = None
+
         excel_path = audio_path[:-4] + "_analysis.xlsx"
         self.__wb.save(excel_path)
+
 
     def __str__(self):
         if self.is_speech:
