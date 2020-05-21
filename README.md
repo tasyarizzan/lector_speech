@@ -1,6 +1,8 @@
 # Система для оценки показателей выразительности речи лектора.
 # System for evaluating expressiveness indicators of lecturer speech.
 
+/ * A desktop application written in Python. The ability to analyze speech both in real time and in audio. Evaluating indicators of     ~~volume, monotony,~~ spatial impression (acoustics), tonal balance (ratio of high and low frequencies), ~~the ratio of silence / speech,~~ ~~pace,~~ the ratio of speech and noise (transparency of sound), the noticeability of interference and distortion.
+
 /*Десктопное приложение, написанное на языке Python. Возможность анализа речи как с микрофона в режиме реального времени, так и из аудио. Оцениваемые показатели выразительности речи и их динамики: ~~громкость~~, ~~монотонность~~, пространственное впечатление (акустика), тональный баланс (соотношения высоких и низких частот), ~~соотношение тишина/речь~~, ~~темп~~, соотношение речи и шума (прозрачность звука), заметность помех и искажений.
 
 # Возможные решения
