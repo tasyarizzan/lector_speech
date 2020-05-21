@@ -101,6 +101,6 @@ class Sound2VecModel:
 
 test_path = 'audio/test1.wav'
 if __name__ == "__main__":
-    sound = Sound2VecModel('test1.wav')
+    sound = Sound2VecModel('audio/test1.wav')
     # print(sound)
     # sound.get_text()
