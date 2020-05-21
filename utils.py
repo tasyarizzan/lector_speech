@@ -11,6 +11,7 @@ import time
 
 def get_volume_times(wav_path, threshold=100000, threshold_low=100, time_constant=0.1):
     wav = wave.open(wav_path, 'r')
+
     length = wav.getnframes()
     samplerate = wav.getframerate()
 
@@ -48,19 +49,30 @@ def get_volume_times(wav_path, threshold=100000, threshold_low=100, time_constan
     return result
 
 def speech_to_text(wav_path):
-    try:
-        rec = sr.Recognizer()
-        harvard = sr.AudioFile(wav_path)
-        with harvard as source:
-            audio = rec.record(source)
-        text = rec.recognize_google(audio, language="ru_RU")
-        if len(text) > 0:
-            list_txt = text.split()
-            myset = set(list_txt)
-            return len(myset), myset
-        else: return 0
-    except Exception as e:
-        print(e)
+        try:
+
+            wav = wave.open(wav_path, 'r')
+            length = wav.getnframes()
+            rate = wav.getframerate()
+            duration = length / float(rate)
+
+            # print('длительность', duration)
+
+            rec = sr.Recognizer()
+            harvard = sr.AudioFile(wav_path)
+            with harvard as source:
+                audio = rec.record(source)
+            text = rec.recognize_google(audio, language="ru_RU")
+            if len(text) > 0:
+                list_txt = text.split()
+                myset = set(list_txt)
+                tempo = len(myset) / duration
+                print('Длина списка:', len(myset), ' Длительность: ', duration, 'ТЕМП =', tempo)
+                return len(myset), myset, tempo
+            else:
+                return 0
+        except Exception as e:
+            print(e)
 
 
 
@@ -124,4 +136,4 @@ def get_monotone(wav_path, THRESHOLD_MONOTONE = 10, time_constant=0.1):
     return res
 
 
-speech_to_text('audio/test1.wav')
+
